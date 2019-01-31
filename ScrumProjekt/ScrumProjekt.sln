@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.168
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScrumProjekt", "ScrumProjekt\ScrumProjekt.csproj", "{D9F29AE7-A153-4FBF-9543-BF71D9197BA3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScrumProjekt.Tests", "ScrumProjekt.Tests\ScrumProjekt.Tests.csproj", "{4A1D1CA2-D9C2-449F-A91B-AD761B96E5D6}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D9F29AE7-A153-4FBF-9543-BF71D9197BA3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D9F29AE7-A153-4FBF-9543-BF71D9197BA3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D9F29AE7-A153-4FBF-9543-BF71D9197BA3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D9F29AE7-A153-4FBF-9543-BF71D9197BA3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4A1D1CA2-D9C2-449F-A91B-AD761B96E5D6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4A1D1CA2-D9C2-449F-A91B-AD761B96E5D6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4A1D1CA2-D9C2-449F-A91B-AD761B96E5D6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4A1D1CA2-D9C2-449F-A91B-AD761B96E5D6}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F5EED3CB-2193-49D6-AED1-46A24010B980}
+	EndGlobalSection
+EndGlobal
