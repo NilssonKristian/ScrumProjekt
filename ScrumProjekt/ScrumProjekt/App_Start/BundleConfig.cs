@@ -23,8 +23,12 @@ namespace ScrumProjekt
                       "~/Scripts/bootstrap.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                      "~/Content/bootstrap.css",
-                      "~/Content/site.css"));
+                      //"~/Content/bootstrap.css",
+
+                      "~/Content/bootstrap-yeti.css",
+                      "~/Content/bootstrap-yeti.min.css",
+                      "~/Content/site.css"
+                      ));
         }
     }
 }
