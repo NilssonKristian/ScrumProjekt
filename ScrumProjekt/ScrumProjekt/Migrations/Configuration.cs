@@ -1,5 +1,6 @@
 namespace ScrumProjekt.Migrations
 {
+
     using Microsoft.AspNet.Identity;
     using Microsoft.AspNet.Identity.EntityFramework;
     using ScrumProjekt.Models;
@@ -13,11 +14,14 @@ namespace ScrumProjekt.Migrations
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
+
             ContextKey = "ScrumProjekt.Models.ApplicationDbContext";
+
         }
 
         protected override void Seed(ScrumProjekt.Models.ApplicationDbContext context)
         {
+
             if (!context.Roles.Any(r => r.Name == "Admin"))
             {
                 var store = new RoleStore<IdentityRole>(context);
