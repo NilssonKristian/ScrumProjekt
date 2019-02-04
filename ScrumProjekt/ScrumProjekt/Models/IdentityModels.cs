@@ -20,14 +20,20 @@ namespace ScrumProjekt.Models
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
-        public ApplicationDbContext()
-            : base("DefaultConnection", throwIfV1Schema: false)
-        {
-        }
+        //public DbSet<PostModels> DbInlägg { get; set; }
+
+        //public ApplicationDbContext()
+        //    : base("DefaultConnection", throwIfV1Schema: false)
+
+        //{
+        //}
 
         public static ApplicationDbContext Create()
         {
             return new ApplicationDbContext();
+
         }
+
+        public System.Data.Entity.DbSet<ScrumProjekt.Models.PostModels> Posts { get; set; }
     }
 }
