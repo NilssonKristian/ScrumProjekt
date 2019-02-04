@@ -13,7 +13,7 @@ namespace ScrumProjekt.Migrations
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = false;
+            AutomaticMigrationsEnabled = true;
 
             ContextKey = "ScrumProjekt.Models.ApplicationDbContext";
 
