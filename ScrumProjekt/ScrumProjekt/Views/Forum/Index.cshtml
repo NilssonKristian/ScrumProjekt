@@ -1,1 +1,7 @@
-﻿
+﻿@model ScrumProjekt.Models.PostViewModels
+
+@foreach(var post in Model.Posts)
+{
+    <p>@post.SenderId.Email</p>
+    <p>@post.Content</p>
+}

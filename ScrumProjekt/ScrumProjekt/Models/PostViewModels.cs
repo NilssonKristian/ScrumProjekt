@@ -8,5 +8,10 @@ namespace ScrumProjekt.Models
     public class PostViewModels
     {
         public List<PostModels> Posts { get; set; }
+
+        public PostViewModels()
+        {
+            Posts = new List<PostModels>();
+        }
     }
 }
