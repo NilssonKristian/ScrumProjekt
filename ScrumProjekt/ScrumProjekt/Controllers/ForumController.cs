@@ -27,22 +27,6 @@ namespace ScrumProjekt.Controllers
             return View();
         }
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        [Authorize]
-        public ActionResult CreatePost(CreatePost post)
-        {
-            var PostModel = new PostModels
-            {
-                SenderId = UserManager.FindById(User.Identity.GetUserId()),
-                Content = post.Content,
-                TimeSent = DateTime.Now
-            };
-
-            DbContext.Posts.Add(PostModel);
-            DbContext.SaveChanges();
-
-            return RedirectToAction("Index","Forum");
-        }
+        
     }
 }
