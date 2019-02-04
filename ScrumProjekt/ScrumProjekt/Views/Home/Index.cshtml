@@ -7,14 +7,17 @@
 
 
 
-<div class="jumbotron">
+<div class="jumbotron" style="margin-top: 40px;">
     <h1>Startelvan</h1>
     <p class="lead">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</p>
-        
-        @Html.ActionLink("Logga in", "Login", "Account", null, new { @class= "btn btn-primary btn-lg" })
+    @if (!Request.IsAuthenticated)
+    {
+         @Html.ActionLink("Logga in", "Login", "Account", null, new { @class = "btn btn-primary btn-lg", style = "margin-right: 20px;" })
 
-   
-        @Html.ActionLink("Registrera ett konto", "Register", "Account", null, new { @class = "btn btn-primary btn-lg" })
-   
+
+         @Html.ActionLink("Registrera ett konto", "Register", "Account", null, new { @class = "btn btn-primary btn-lg" })
+
+    }
+
 </div>
 
