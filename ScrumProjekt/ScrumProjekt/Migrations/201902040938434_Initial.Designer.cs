@@ -7,13 +7,13 @@ namespace ScrumProjekt.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class Lagttilladminrattigheterpausers : IMigrationMetadata
+    public sealed partial class Initial : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(Lagttilladminrattigheterpausers));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(Initial));
         
         string IMigrationMetadata.Id
         {
-            get { return "201901311037172_Lagt till adminrattigheter pa users"; }
+            get { return "201902040938434_Initial"; }
         }
         
         string IMigrationMetadata.Source
