@@ -20,28 +20,9 @@ namespace ScrumProjekt
             ConfigureAuth(app);
             ctx = new ApplicationDbContext();
             UM = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(ctx));
-            CreateAdminAccount();
+           
         }
 
-        public void CreateAdminAccount()
-        {
-            PasswordHasher pwh = new PasswordHasher();
-
-            ApplicationUser admin = new ApplicationUser
-            {
-
-                Email = "admin@oru.se",
-                UserName = "admin@oru.se",
-                SecurityStamp = Guid.NewGuid().ToString(),
-                isAdmin = true
-
-
-            };
-
-            UM.Create(admin, "Admin.1");
-
-            
-
-        }
+       
     }
 }
