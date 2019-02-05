@@ -7,6 +7,8 @@
 
     <p>@post.SenderId.Email</p>
     <p>@post.Content</p>
+    <br />
+    <hr />
 
     using (Html.BeginForm("Delete", "Post", new { id = post.Id }, FormMethod.Post,  new { @class = "form-horizontal", role = "form" }))
     {

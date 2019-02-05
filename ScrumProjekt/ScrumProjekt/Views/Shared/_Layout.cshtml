@@ -22,7 +22,7 @@
             <div class="collapse navbar-collapse" id="navbarColor01">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item active">
-                        <a class="nav-link" href="#">Forum</a>
+                        @Html.ActionLink("Forum", "Index", "Forum", routeValues: null, htmlAttributes: new { @class="nav-link"})
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">Forskning</a>
