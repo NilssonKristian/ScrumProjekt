@@ -35,5 +35,6 @@ namespace ScrumProjekt.Models
         }
 
         public System.Data.Entity.DbSet<ScrumProjekt.Models.PostModels> Posts { get; set; }
+        public System.Data.Entity.DbSet<ScrumProjekt.Models.Forum> Forums { get; set; }
     }
 }
