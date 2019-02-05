@@ -22,17 +22,27 @@ namespace ScrumProjekt.Controllers
         }
 
         // GET: Forum
-        public ActionResult Index()
+        public ActionResult Index(int? id)
         {
+            if (!id.HasValue)
+            {
+                return View("Show");
+            }
 
-            var result = DbContext.Posts.Include(p => p.SenderId).ToList();
-            
+            var forum = DbContext.Forums.Where(i => i.Id == id).Include(p => p.Posts).Include("Posts.SenderId").FirstOrDefault();
+
+            if (forum == null) {
+                return View("Show");
+            }
+
+
+
             var model = new PostViewModels
             {
-                Posts = result
+                Posts = forum.Posts.ToList()
             };
 
-            return View(model);
+            return View("Index",model);
         }
 
 

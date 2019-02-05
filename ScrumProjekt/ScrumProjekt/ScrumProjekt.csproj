@@ -270,6 +270,7 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Forum\Index.cshtml" />
     <Content Include="Views\Post\Create.cshtml" />
+    <Content Include="Views\Forum\Show.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
