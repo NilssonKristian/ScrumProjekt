@@ -48,6 +48,59 @@ namespace ScrumProjekt.Migrations
 
 
             }
+            if (!context.Forums.Any(u => u.ForumName == "Formellt Forum"))
+            {
+                
+                var forum = new Forum
+                {
+                    ForumName = "Formellt Forum"
+
+                };
+
+                context.Forums.Add(forum);
+
+
+            }
+            
+            if (!context.Forums.Any(u => u.ForumName == "Informellt Forum"))
+            {
+                
+                var forum = new Forum
+                {
+                    ForumName = "Informellt Forum"
+
+                };
+
+                context.Forums.Add(forum);
+
+
+            }
+            if (!context.Forums.Any(u => u.ForumName == "Forskning"))
+            {
+                
+                var forum = new Forum
+                {
+                    ForumName = "Forskning"
+
+                };
+
+                context.Forums.Add(forum);
+
+
+            }
+            if (!context.Forums.Any(u => u.ForumName == "Utbildning"))
+            {
+
+                var forum = new Forum
+                {
+                    ForumName = "Utbildning"
+
+                };
+
+                context.Forums.Add(forum);
+
+
+            }
         }
     }
 }
