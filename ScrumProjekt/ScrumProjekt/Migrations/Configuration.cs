@@ -38,7 +38,9 @@ namespace ScrumProjekt.Migrations
                 var user = new ApplicationUser
                 {
                     Email = "admin@oru.se",
-                    UserName = "admin@oru.se"
+                    UserName = "admin@oru.se",
+                    FirstName = "FirstNameAdmin",
+                    LastName = "LastNameAdmin"
                 };
 
                 IdentityResult result = manager.Create(user, "Admin123");
@@ -46,8 +48,26 @@ namespace ScrumProjekt.Migrations
                 if (result.Succeeded == false) { throw new Exception(result.Errors.First()); }
                 manager.AddToRole(user.Id, "Admin");
 
-
             }
+
+            if (!context.Users.Any(u => u.UserName == "test1@oru.se"))
+            {
+                var store = new UserStore<ApplicationUser>(context);
+                var manager = new UserManager<ApplicationUser>(store);
+                var user = new ApplicationUser
+                {
+                    Email = "test1@oru.se",
+                    UserName = "test1@oru.se",
+                    FirstName = "Anders",
+                    LastName = "Andersson"
+                };
+
+                IdentityResult result = manager.Create(user, "Test123");
+
+                if (result.Succeeded == false) { throw new Exception(result.Errors.First()); }
+                
+            }
+
             if (!context.Forums.Any(u => u.ForumName == "Formellt Forum"))
             {
                 
