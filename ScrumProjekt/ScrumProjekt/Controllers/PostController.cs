@@ -55,13 +55,13 @@ namespace ScrumProjekt.Controllers
                 return RedirectToAction("Index", "Forum");
             }
             //post does not exist
-            var post = DbContext.Posts.SingleOrDefault(i => i.Id == id);
+            var post = DbContext.Posts.Include(p => p.SenderId).SingleOrDefault(i => i.Id == id);
             if (post == null)
             {
                 return RedirectToAction("Index", "Forum");
             }
             //User is not authenticated
-            if (post.SenderId.Id != User.Identity.GetUserId() || !User.IsInRole("Admin"))
+            if (post.SenderId.Id != User.Identity.GetUserId())
             {
                 return RedirectToAction("Index", "Forum");
             }
