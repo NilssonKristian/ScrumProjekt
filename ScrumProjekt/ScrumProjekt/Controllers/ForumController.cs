@@ -39,18 +39,14 @@ namespace ScrumProjekt.Controllers
 
             var model = new PostViewModels
             {
-                Posts = forum.Posts.ToList()
+                Posts = forum.Posts.ToList(),
+                Forum = forum
             };
 
             return View("Index",model);
         }
 
-        // GET: Forum/Index
-        public ActionResult CreatePostPartialView()
-        {
-         
-            return PartialView("CreatePostPartialView");
-        }
+       
 
 
     }

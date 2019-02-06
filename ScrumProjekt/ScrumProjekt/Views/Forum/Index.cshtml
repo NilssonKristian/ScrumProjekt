@@ -1,4 +1,5 @@
 ﻿@model ScrumProjekt.Models.PostViewModels
+    @using ScrumProjekt.Models
 
 @*@{
         ViewBag.Title = "About";
@@ -16,7 +17,8 @@
 
 <body>
 
-    @Html.Action("CreatePostPartialView", "Forum")
+
+    @Html.Partial("CreatePostPartialView", new CreatePost { ForumId = Model.Forum.Id})
 
     <!-- Page Content -->
     <div class="container">
