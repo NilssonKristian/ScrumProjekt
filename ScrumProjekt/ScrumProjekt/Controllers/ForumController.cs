@@ -45,8 +45,13 @@ namespace ScrumProjekt.Controllers
             return View("Index",model);
         }
 
+        // GET: Forum/Index
+        public ActionResult CreatePostPartialView()
+        {
+         
+            return PartialView("CreatePostPartialView");
+        }
 
 
-        
     }
 }

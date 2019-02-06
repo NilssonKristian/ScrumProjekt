@@ -215,6 +215,8 @@
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
+    <Content Include="Content\bootstrap-yeti.css.css" />
+    <Content Include="Content\bootstrap-yeti.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="favicon.ico" />
@@ -270,6 +272,7 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Forum\Index.cshtml" />
     <Content Include="Views\Post\Create.cshtml" />
+    <Content Include="Views\Forum\CreatePostPartialView.cshtml" />
     <Content Include="Views\Forum\Show.cshtml" />
   </ItemGroup>
   <ItemGroup>
