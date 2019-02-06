@@ -12,6 +12,7 @@ namespace ScrumProjekt.Models
         public int Id { get; set; }
 
         public ApplicationUser SenderId { get; set; }
+        [DataType(DataType.MultilineText)]
         public string Content { get; set; }
         public DateTime TimeSent { get; set; }
 

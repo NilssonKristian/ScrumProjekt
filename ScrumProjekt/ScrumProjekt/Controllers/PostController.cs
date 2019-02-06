@@ -76,6 +76,41 @@ namespace ScrumProjekt.Controllers
             return RedirectToAction("Index", "Forum");
         }
 
+        public ActionResult Edit(int? id)
+        {
+            if (!id.HasValue)
+            {
+                return null;
+            }
+
+            var post = DbContext.Posts.Where(p => p.Id == id).FirstOrDefault();
+
+            if (post == null)
+            {
+                return null;
+            }
+            return View(post);
+        }
+        [HttpPost]
+        public ActionResult Edit(int? id, PostModels post)
+        {
+            if (!id.HasValue)
+            {
+                return null;
+            }
+
+            var dbpost = DbContext.Posts.Where(p => p.Id == id).Include(p => p.PostedForum).FirstOrDefault();
+
+            if (dbpost == null)
+            {
+                return null;
+            }
+            dbpost.Content = post.Content;
+            DbContext.SaveChanges();
+
+            return RedirectToAction("Index","Forum", new {id = dbpost.PostedForum.Id });
+
+        }
 
 
     }
