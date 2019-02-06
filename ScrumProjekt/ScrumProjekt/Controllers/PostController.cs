@@ -33,8 +33,6 @@ namespace ScrumProjekt.Controllers
         public ActionResult Create(CreatePost post)
         {
             var tempFiles = new List<File>();
-            //HttpFileCollectionBase tempFilebase = Request.Files;
-            //var hej = (post.files).Count;
             var lista = new List<HttpPostedFileBase>();
             foreach (var i in post.files)
             {
@@ -58,19 +56,21 @@ namespace ScrumProjekt.Controllers
                     DbContext.SaveChanges();
                 }
             }
-
+            
+            var forum = DbContext.Forums.Where(m => m.Id == post.ForumId).Include(p => p.Posts).SingleOrDefault();
             var PostModel = new PostModels
             {
                 SenderId = UserManager.FindById(User.Identity.GetUserId()),
                 Content = post.Content,
                 TimeSent = DateTime.Now,
-                Files = tempFiles
+                Files = tempFiles,
+                PostedForum = forum
             };
 
             DbContext.Posts.Add(PostModel);
             DbContext.SaveChanges();
 
-            return RedirectToAction("Index", "Forum");
+            return RedirectToAction("Index", "Forum", new { id=PostModel.PostedForum.Id});
         }
 
         

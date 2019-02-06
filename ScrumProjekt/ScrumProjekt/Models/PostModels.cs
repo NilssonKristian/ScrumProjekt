@@ -15,5 +15,6 @@ namespace ScrumProjekt.Models
         public string Content { get; set; }
         public DateTime TimeSent { get; set; }
         public List<File> Files { get; set; }
+        public Forum PostedForum { get; set; }
     }
 }
