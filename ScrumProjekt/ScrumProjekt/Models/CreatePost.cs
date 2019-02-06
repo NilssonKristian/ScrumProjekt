@@ -10,5 +10,8 @@ namespace ScrumProjekt.Models
     {
         [DataType(DataType.MultilineText)]
         public string Content { get; set; }
+
+        [System.Web.Mvc.HiddenInput(DisplayValue = false)]
+        public int ForumId { get; set; }
     }
 }

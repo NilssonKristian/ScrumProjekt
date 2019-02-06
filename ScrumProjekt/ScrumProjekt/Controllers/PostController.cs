@@ -32,17 +32,19 @@ namespace ScrumProjekt.Controllers
         [Authorize]
         public ActionResult Create(CreatePost post)
         {
+            var forum = DbContext.Forums.Where(m => m.Id == post.ForumId).Include(p => p.Posts).SingleOrDefault();
             var PostModel = new PostModels
             {
                 SenderId = UserManager.FindById(User.Identity.GetUserId()),
                 Content = post.Content,
-                TimeSent = DateTime.Now
+                TimeSent = DateTime.Now,
+                PostedForum = forum
             };
 
             DbContext.Posts.Add(PostModel);
             DbContext.SaveChanges();
 
-            return RedirectToAction("Index", "Forum");
+            return RedirectToAction("Index", "Forum", new { id=PostModel.PostedForum.Id});
         }
         
         [HttpPost]
