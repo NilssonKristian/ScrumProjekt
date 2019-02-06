@@ -6,14 +6,10 @@ using System.Web;
 
 namespace ScrumProjekt.Models
 {
-    public class PostModels
+    public class File
     {
         [Key]
         public int Id { get; set; }
-
-        public ApplicationUser SenderId { get; set; }
-        public string Content { get; set; }
-        public DateTime TimeSent { get; set; }
-        public List<File> Files { get; set; }
+        public string Filepath { get; set; }
     }
 }

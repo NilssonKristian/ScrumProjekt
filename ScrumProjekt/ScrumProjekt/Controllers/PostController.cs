@@ -32,11 +32,39 @@ namespace ScrumProjekt.Controllers
         [Authorize]
         public ActionResult Create(CreatePost post)
         {
+            var tempFiles = new List<File>();
+            //HttpFileCollectionBase tempFilebase = Request.Files;
+            //var hej = (post.files).Count;
+            var lista = new List<HttpPostedFileBase>();
+            foreach (var i in post.files)
+            {
+                lista.Add(i);
+            }
+            foreach (var i in lista)
+            {
+                if (i != null)
+                {
+
+                    string filename = System.IO.Path.GetFileName(i.FileName);
+                    string path = System.IO.Path.Combine(Server.MapPath("~/Files/"), filename);
+                    i.SaveAs(path);
+                    var tempFile = new File
+                    {
+                        Filepath = path
+                    };
+
+                    tempFiles.Add(tempFile);
+                    DbContext.Files.Add(tempFile);
+                    DbContext.SaveChanges();
+                }
+            }
+
             var PostModel = new PostModels
             {
                 SenderId = UserManager.FindById(User.Identity.GetUserId()),
                 Content = post.Content,
-                TimeSent = DateTime.Now
+                TimeSent = DateTime.Now,
+                Files = tempFiles
             };
 
             DbContext.Posts.Add(PostModel);
@@ -44,6 +72,8 @@ namespace ScrumProjekt.Controllers
 
             return RedirectToAction("Index", "Forum");
         }
+
+        
         
         [HttpPost]
         [ValidateAntiForgeryToken]
