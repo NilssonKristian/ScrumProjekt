@@ -203,6 +203,7 @@
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\CategoryModels.cs" />
     <Compile Include="Models\File.cs" />
     <Compile Include="Models\ForumModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -275,7 +276,6 @@
     <Content Include="Views\Post\Create.cshtml" />
     <Content Include="Views\Forum\CreatePostPartialView.cshtml" />
     <Content Include="Views\Forum\Show.cshtml" />
-
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

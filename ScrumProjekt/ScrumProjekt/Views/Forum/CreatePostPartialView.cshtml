@@ -20,7 +20,9 @@
                 @Html.ValidationMessageFor(model => Model.Content, "", new { @class = "text-danger" })
             </div>
         </div>
-
+        <div>
+            @Html.DropDownList( "Categories", "Select a category" )
+        </div>
         @Html.HiddenFor(model => Model.ForumId)
 
         <div class="form-group">

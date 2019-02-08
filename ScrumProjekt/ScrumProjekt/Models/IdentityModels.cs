@@ -40,5 +40,6 @@ namespace ScrumProjekt.Models
         public System.Data.Entity.DbSet<ScrumProjekt.Models.File> Files { get; set; }
         public System.Data.Entity.DbSet<ScrumProjekt.Models.PostModels> Posts { get; set; }
         public System.Data.Entity.DbSet<ScrumProjekt.Models.Forum> Forums { get; set; }
+        public DbSet<CategoryModels> Categories { get; set; }
     }
 }

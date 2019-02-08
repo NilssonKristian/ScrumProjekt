@@ -121,6 +121,66 @@ namespace ScrumProjekt.Migrations
 
 
             }
+            if (!context.Categories.Any(u => u.Name == "Utbildning"))
+            {
+
+                var category = new CategoryModels
+                {
+                    Name = "Utbildning"
+
+                };
+
+                context.Categories.Add(category);
+
+            }
+            if (!context.Categories.Any(u => u.Name == "Forskning"))
+            {
+
+                var category = new CategoryModels
+                {
+                    Name = "Forskning"
+
+                };
+
+                context.Categories.Add(category);
+
+            }
+            if (!context.Categories.Any(u => u.Name == "Allmänt"))
+            {
+
+                var category = new CategoryModels
+                {
+                    Name = "Allmänt"
+
+                };
+
+                context.Categories.Add(category);
+
+            }
+            if (!context.Categories.Any(u => u.Name == "After Work"))
+            {
+
+                var category = new CategoryModels
+                {
+                    Name = "After Work"
+
+                };
+
+                context.Categories.Add(category);
+
+            }
+            if (!context.Categories.Any(u => u.Name == "Möten"))
+            {
+
+                var category = new CategoryModels
+                {
+                    Name = "Möten"
+
+                };
+
+                context.Categories.Add(category);
+
+            }
         }
     }
 }
