@@ -47,6 +47,11 @@
                     <div class="card-footer text-muted">
                         @post.TimeSent
                         <p>@post.SenderId.Email</p>
+                        
+                     <button type="button" onclick="location.href='@Url.Action("Edit", "Post")'">Edit</button>
+
+                      
+
                     </div>
                     <!-- Comment 1-->
                     <div class="media mb-4">
@@ -143,12 +148,15 @@
                                 </ul>
                             </div>
                         </div>
+
                     </div>
 
                 </div>
                 <!-- /.row -->
+               
 
             </div>
+          
             <!-- /.container -->
             <!-- Bootstrap core JavaScript -->
             <script src="vendor/jquery/jquery.min.js"></script>

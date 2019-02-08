@@ -276,6 +276,7 @@
     <Content Include="Views\Post\Create.cshtml" />
     <Content Include="Views\Forum\CreatePostPartialView.cshtml" />
     <Content Include="Views\Forum\Show.cshtml" />
+    <Content Include="Views\Post\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
