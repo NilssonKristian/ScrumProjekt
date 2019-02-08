@@ -58,13 +58,15 @@ namespace ScrumProjekt.Controllers
             }
             
             var forum = DbContext.Forums.Where(m => m.Id == post.ForumId).Include(p => p.Posts).SingleOrDefault();
+            var category = Request.Form["Categories"].ToString();
             var PostModel = new PostModels
             {
                 SenderId = UserManager.FindById(User.Identity.GetUserId()),
                 Content = post.Content,
                 TimeSent = DateTime.Now,
                 Files = tempFiles,
-                PostedForum = forum
+                PostedForum = forum,
+                CategoryPostModels = category
             };
 
             DbContext.Posts.Add(PostModel);

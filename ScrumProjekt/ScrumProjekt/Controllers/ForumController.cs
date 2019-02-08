@@ -24,6 +24,9 @@ namespace ScrumProjekt.Controllers
         // GET: Forum
         public ActionResult Index(int? id)
         {
+
+            ViewBag.Categories = new SelectList(DbContext.Categories, "Id", "Name");
+
             if (!id.HasValue)
             {
                 return View("Show");
