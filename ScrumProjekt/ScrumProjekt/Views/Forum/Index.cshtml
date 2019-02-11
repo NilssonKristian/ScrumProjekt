@@ -173,6 +173,14 @@
 @*@foreach (var post in Model.Posts)
     {
 
+        @Html.AntiForgeryToken()
+        <div class="col-md-offset-2 col-md-10 post" style="margin-top: 20px">
+            <input type="submit" class="btn btn-primary btn-lg" value="Delete" />
+        </div>
+    }
+}
+
+
         <p>@post.SenderId.Email</p>
         <p>@post.Content</p>
         <br />
@@ -186,3 +194,4 @@
             </div>
         }
     }*@
+
