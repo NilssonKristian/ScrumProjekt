@@ -171,6 +171,7 @@ namespace ScrumProjekt.Controllers
 
         //
         // POST: /Manage/VerifyPhoneNumber
+        // plajsie
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> VerifyPhoneNumber(VerifyPhoneNumberViewModel model)
