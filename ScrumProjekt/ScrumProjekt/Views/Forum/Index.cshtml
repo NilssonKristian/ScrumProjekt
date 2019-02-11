@@ -12,19 +12,16 @@
 <!DOCTYPE html>
 <html lang="en">
 
-
-</head>
-
 <body>
 
 
-    @Html.Partial("CreatePostPartialView", new CreatePost { ForumId = Model.Forum.Id})
+    @Html.Partial("CreatePostPartialView", new CreatePost{ ForumId = Model.Forum.Id})
 
 
     <!-- Page Content -->
-    <div class="container">
+    @*<div class="container">
 
-        <div class="row">
+        <div class="row">*@
 
             <!-- Blog Entries Column -->
             <div class="col-md-8">
@@ -45,7 +42,8 @@
 
                     </div>
                     <div class="card-footer text-muted">
-                        @post.TimeSent
+                        <p>@post.TimeSent</p>
+                        <p>@post.CategoryPostModels</p>
                         <p>@post.SenderId.Email</p>
                         
                      <button type="button" onclick="location.href='@Url.Action("Edit", "Post")'">Edit</button>
