@@ -49,9 +49,13 @@ namespace ScrumProjekt.Controllers
 
             return View("Index",model);
         }
-        
 
+        [Authorize]
+        public ActionResult ToggleNotications(int? id)
+        {
 
+            return null;
+        }
 
 
     }

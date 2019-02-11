@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using System;
+using System.Collections.Generic;
 
 namespace ScrumProjekt.Models
 {
@@ -12,6 +13,7 @@ namespace ScrumProjekt.Models
     {
         public string FirstName { get; set; } 
         public string LastName { get; set; }
+        public List<Forum> Subscriptions { get; set; }
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {
