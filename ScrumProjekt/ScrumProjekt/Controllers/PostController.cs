@@ -10,6 +10,7 @@ using System.Web.Mvc;
 
 namespace ScrumProjekt.Controllers
 {
+
     public class PostController : Controller
     {
 
@@ -79,6 +80,7 @@ namespace ScrumProjekt.Controllers
         
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public ActionResult Delete(int? id)
         {
             //No id suplied
@@ -106,6 +108,7 @@ namespace ScrumProjekt.Controllers
             return RedirectToAction("Index", "Forum");
         }
 
+        [Authorize]
         public ActionResult Edit(int? id)
         {
             if (!id.HasValue)
@@ -121,6 +124,7 @@ namespace ScrumProjekt.Controllers
             }
             return View(post);
         }
+        [Authorize]
         [HttpPost]
         public ActionResult Edit(int? id, PostModels post)
         {
