@@ -22,6 +22,7 @@ namespace ScrumProjekt.Controllers
         }
 
         // GET: Forum
+        [Authorize]
         public ActionResult Index(int? id)
         {
             if (!id.HasValue)
