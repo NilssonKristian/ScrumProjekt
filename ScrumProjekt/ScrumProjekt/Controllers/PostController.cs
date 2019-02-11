@@ -32,18 +32,50 @@ namespace ScrumProjekt.Controllers
         [Authorize]
         public ActionResult Create(CreatePost post)
         {
+            var tempFiles = new List<File>();
+            var lista = new List<HttpPostedFileBase>();
+            foreach (var i in post.files)
+            {
+                lista.Add(i);
+            }
+            foreach (var i in lista)
+            {
+                if (i != null)
+                {
+
+                    string filename = System.IO.Path.GetFileName(i.FileName);
+                    string path = System.IO.Path.Combine(Server.MapPath("~/Files/"), filename);
+                    i.SaveAs(path);
+                    var tempFile = new File
+                    {
+                        Filepath = path
+                    };
+
+                    tempFiles.Add(tempFile);
+                    DbContext.Files.Add(tempFile);
+                    DbContext.SaveChanges();
+                }
+            }
+            
+            var forum = DbContext.Forums.Where(m => m.Id == post.ForumId).Include(p => p.Posts).SingleOrDefault();
+            var category = Request.Form["Categories"].ToString();
             var PostModel = new PostModels
             {
                 SenderId = UserManager.FindById(User.Identity.GetUserId()),
                 Content = post.Content,
-                TimeSent = DateTime.Now
+                TimeSent = DateTime.Now,
+                Files = tempFiles,
+                PostedForum = forum,
+                CategoryPostModels = category
             };
 
             DbContext.Posts.Add(PostModel);
             DbContext.SaveChanges();
 
-            return RedirectToAction("Index", "Forum");
+            return RedirectToAction("Index", "Forum", new { id=PostModel.PostedForum.Id});
         }
+
+        
         
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -74,6 +106,41 @@ namespace ScrumProjekt.Controllers
             return RedirectToAction("Index", "Forum");
         }
 
+        public ActionResult Edit(int? id)
+        {
+            if (!id.HasValue)
+            {
+                return null;
+            }
+
+            var post = DbContext.Posts.Where(p => p.Id == id).FirstOrDefault();
+
+            if (post == null)
+            {
+                return null;
+            }
+            return View(post);
+        }
+        [HttpPost]
+        public ActionResult Edit(int? id, PostModels post)
+        {
+            if (!id.HasValue)
+            {
+                return null;
+            }
+
+            var dbpost = DbContext.Posts.Where(p => p.Id == id).Include(p => p.PostedForum).FirstOrDefault();
+
+            if (dbpost == null)
+            {
+                return null;
+            }
+            dbpost.Content = post.Content;
+            DbContext.SaveChanges();
+
+            return RedirectToAction("Index","Forum", new {id = dbpost.PostedForum.Id });
+
+        }
 
 
     }
