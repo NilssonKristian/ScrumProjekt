@@ -48,11 +48,17 @@
                         <p>@post.TimeSent</p>
                         <p>@post.CategoryPostModels</p>
                         <p>@post.SenderId.Email</p>
-                       
+
                         @if (User.IsInRole("Admin") || User.Identity.GetUserId() == post.SenderId.Id)
                         {
-                     <button type="button" onclick="location.href='@Url.Action("Edit", "Post", new { id = post.Id })'">Edit</button>
+                            <button type="button" onclick="location.href='@Url.Action("Edit", "Post", new { id = post.Id })'">Edit</button>
                         }
+                        @if (User.IsInRole("Admin") || User.Identity.GetUserId() == post.SenderId.Id)
+                        {
+                            <button type="button" onclick="location.href='@Url.Action("Delete", "Post", new { id = post.Id })'">Delete</button>
+                        }
+
+
 
                     </div>
                     <!-- Comment 1-->
