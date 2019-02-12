@@ -1,5 +1,6 @@
 ﻿@model ScrumProjekt.Models.PostViewModels
     @using ScrumProjekt.Models
+    @using Microsoft.AspNet.Identity
 
 @*@{
         ViewBag.Title = "About";
@@ -47,8 +48,11 @@
                     <div class="card-footer text-muted">
                         @post.TimeSent
                         <p>@post.SenderId.Email</p>
-                        
-                     <button type="button" onclick="location.href='@Url.Action("Edit", "Post")'">Edit</button>
+                       
+                        @if (User.IsInRole("Admin") || User.Identity.GetUserId() == post.SenderId.Id)
+                        {
+                     <button type="button" onclick="location.href='@Url.Action("Edit", "Post", new { id = post.Id })'">Edit</button>
+                        }
 
                       
 
