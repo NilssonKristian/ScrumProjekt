@@ -25,6 +25,13 @@
             @Html.DropDownList("Categories", "Select a category")
         </div>
         <br />
+        @if (User.IsInRole("Admin"))
+        {
+            <div>
+                <button type="button" onclick="location.href='@Url.Action("Index", "Categories")'">Add a category</button>
+            </div>
+            <br />
+        }
         @Html.HiddenFor(model => Model.ForumId)
 
         <div>
