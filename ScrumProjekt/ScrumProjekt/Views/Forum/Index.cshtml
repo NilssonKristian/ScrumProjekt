@@ -27,7 +27,7 @@
             <div class="col-md-8">
 
                 <h1 class="my-4">
-                    Formellt forum
+                    @Model.Forum.ForumName
 
                 </h1>
 
@@ -37,18 +37,20 @@
                 <div class="card mb-4">
 
                     <div class="card-body">
-                        <h2 class="card-title">Post Title</h2>
+                        <h4 class="card-title">Post Title</h4>
                         <p class="card-text">@post.Content</p>
 
                     </div>
                     <div class="card-footer text-muted">
+                        <p>@post.SenderId.FirstName</p>
+                        <p>@post.SenderId.LastName</p>
                         <p>@post.TimeSent</p>
                         <p>@post.CategoryPostModels</p>
                         <p>@post.SenderId.Email</p>
-                        
-                     <button type="button" onclick="location.href='@Url.Action("Edit", "Post")'">Edit</button>
 
-                      
+                        <button type="button" onclick="location.href='@Url.Action("Edit", "Post")'">Edit</button>
+
+
 
                     </div>
                     <!-- Comment 1-->
@@ -57,7 +59,7 @@
                         <div class="media-body">
 
                             <span class="badge badge-primary">@post.SenderId.Email</span>
-                            Schyst hylla
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent sit amet ultricies augue. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent sed euismod eros, a hendrerit dui. Mauris sodales ut risus sed consequat. Sed augue felis, suscipit vestibulum facilisis at, tempor sed felis. Proin at velit convallis, convallis sem vel, tristique justo. </p>
                         </div>
                     </div>
 
@@ -67,7 +69,7 @@
                         <div class="media-body">
 
                             <span class="badge badge-primary">@post.SenderId.Email</span>
-                            Jävlar vad bra post
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent sit amet ultricies augue. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent sed euismod eros, a hendrerit dui. Mauris sodales ut risus sed consequat. Sed augue felis, suscipit vestibulum facilisis at, tempor sed felis. Proin at velit convallis, convallis sem vel, tristique justo. </p>
                         </div>
                     </div>
 
