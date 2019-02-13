@@ -146,6 +146,36 @@ namespace ScrumProjekt.Controllers
 
         }
 
+        [HttpPost]
+        public ActionResult PostComment(CommentViewModel comment)
+        {
+
+
+            var post = DbContext.Posts.Where(p => p.Id == comment.PostID).Include(p => p.PostedForum).FirstOrDefault();
+            if (post == null) {
+                //Gör något, posten finns inte
+            }
+            
+                var c = new Comment
+                {
+                    User = UserManager.FindById(User.Identity.GetUserId()),
+                    Content = comment.Content,
+                    TimeSent = DateTime.Now,
+                    Post = post
+                };
+
+                
+            
+        
+                DbContext.Comments.Add(c);
+                DbContext.SaveChanges();
+
+            return RedirectToAction("Index", "Forum", new { id = post.PostedForum.Id });
+
+        }
+
+
+
 
     }
 }

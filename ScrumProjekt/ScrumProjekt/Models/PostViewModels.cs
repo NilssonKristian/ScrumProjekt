@@ -9,10 +9,12 @@ namespace ScrumProjekt.Models
     {
         public List<PostModels> Posts { get; set; }
         public Forum Forum { get; set; }
+        public List<Comment> CommentList { get; set; }
 
         public PostViewModels()
         {
             Posts = new List<PostModels>();
+            CommentList = new List<Comment>();
         }
     }
 }

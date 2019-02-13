@@ -204,6 +204,8 @@
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\CategoryModels.cs" />
+    <Compile Include="Models\CommentModels.cs" />
+    <Compile Include="Models\CommentViewModel.cs" />
     <Compile Include="Models\File.cs" />
     <Compile Include="Models\ForumModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -277,6 +279,7 @@
     <Content Include="Views\Forum\CreatePostPartialView.cshtml" />
     <Content Include="Views\Forum\Show.cshtml" />
     <Content Include="Views\Post\Edit.cshtml" />
+    <Content Include="Views\Forum\CreateCommentPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
