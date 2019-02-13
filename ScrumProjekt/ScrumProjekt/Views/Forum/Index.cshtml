@@ -1,5 +1,9 @@
 ﻿@model ScrumProjekt.Models.PostViewModels
-    @using ScrumProjekt.Models
+
+@using ScrumProjekt.Models
+
+    @using Microsoft.AspNet.Identity
+
 
 @*@{
         ViewBag.Title = "About";
@@ -15,7 +19,9 @@
 <body>
 
 
+
     @Html.Partial("CreatePostPartialView", new CreatePost { ForumId = Model.Forum.Id })
+
 
 
     <!-- Page Content -->
@@ -24,12 +30,9 @@
         <div class="row">*@
 
     <!-- Blog Entries Column -->
-    <div class="col-8">
 
-        <h1 class="my-4">
-            Formellt forum
-
-        </h1>
+    <div class="col-md-8">
+                <h1 class="my-4">@Model.Forum.ForumName</h1>
 
         @foreach (var post in Model.Posts)
         {
@@ -48,41 +51,64 @@
 
                     <button type="button" onclick="location.href='@Url.Action("Edit", "Post")'">Edit</button>
 
+                    <div class="card-body">
+                        <h4 class="card-title">Post Title</h4>
+                        <p class="card-text">@post.Content</p>
 
+                    </div>
+                    <div class="card-footer text-muted">
+                        <p>@post.SenderId.FirstName</p>
+                        <p>@post.SenderId.LastName</p>
+                        <p>@post.TimeSent</p>
+                        <p>@post.CategoryPostModels</p>
+                        <p>@post.SenderId.Email</p>
 
-                </div>
+                        @if (User.IsInRole("Admin") || User.Identity.GetUserId() == post.SenderId.Id)
+                        {
+                            <button type="button" onclick="location.href='@Url.Action("Edit", "Post", new { id = post.Id })'">Edit</button>
+                        }
+                        @if (User.IsInRole("Admin") || User.Identity.GetUserId() == post.SenderId.Id)
+                        {
+                            <button type="button" onclick="location.href='@Url.Action("Delete", "Post", new { id = post.Id })'">Delete</button>
+                        }
+
+                @foreach (var comment in Model.CommentList)
+                {
+                    if (post.Id == comment.Post.Id) { 
                 <!-- Comment 1-->
                 <div class="media mb-4">
 
-                    <div class="media-body">
-
-                        <span class="badge badge-primary">@post.SenderId.Email</span>
-                        Schyst hylla
+                        <span class="badge badge-primary">@post.SenderId.FirstName</span>
+                        @comment.Content
                     </div>
                 </div>
+                    }
+                }
 
-                <!-- Comment 2-->
-                <div class="media mb-4">
+           
+            </div>
+      </div>
+            @Html.Partial("CreateCommentPartial", new CommentViewModel { PostID = post.Id})
+        }
+        
 
-                    <div class="media-body">
 
-                        <span class="badge badge-primary">@post.SenderId.Email</span>
-                        Jävlar vad bra post
-                    </div>
-                </div>
+        <!-- Sidebar Widgets Column -->
+        <div class="col-md-4">
 
-                <div class="card my-4">
-                    <h5 class="card-header">Leave a Comment:</h5>
-                    <div class="card-body">
-                        <form>
-                            <div class="form-group">
-                                <textarea class="form-control text-box single-line" rows="3"></textarea>
-                            </div>
-                            <button type="submit" class="btn btn-primary">Submit</button>
-                        </form>
+            <!-- Search Widget -->
+            <div class="card my-4">
+                <h5 class="card-header">Search</h5>
+                <div class="card-body">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Search for...">
+                        <span class="input-group-btn">
+                            <button class="btn btn-secondary" type="button">Go!</button>
+                        </span>
                     </div>
                 </div>
             </div>
+
 
         }
         <!--Single comment-->
@@ -125,11 +151,13 @@
 
                             </li>
 
+
                         </ul>
                     </div>
                 </div>
 
             </div>
+
             <button class="btn btn-secondary" type="button" id="CategoryGoBtn">Go!</button>
         </div>
 
@@ -177,6 +205,7 @@
 
  }
 
+
 </body>
 
 </html>
@@ -186,27 +215,27 @@
 
 
 @*@foreach (var post in Model.Posts)
-    {
-
-        @Html.AntiForgeryToken()
-        <div class="col-md-offset-2 col-md-10 post" style="margin-top: 20px">
-            <input type="submit" class="btn btn-primary btn-lg" value="Delete" />
-        </div>
-    }
-}
-
-
-        <p>@post.SenderId.Email</p>
-        <p>@post.Content</p>
-        <br />
-        <hr />
-
-        using (Html.BeginForm("Delete", "Post", new { id = post.Id }, FormMethod.Post,  new { @class = "form-horizontal", role = "form" }))
         {
+
             @Html.AntiForgeryToken()
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" class="btn btn-default" value="Delete" />
+            <div class="col-md-offset-2 col-md-10 post" style="margin-top: 20px">
+                <input type="submit" class="btn btn-primary btn-lg" value="Delete" />
             </div>
         }
-    }*@
+    }
+
+
+            <p>@post.SenderId.Email</p>
+            <p>@post.Content</p>
+            <br />
+            <hr />
+
+            using (Html.BeginForm("Delete", "Post", new { id = post.Id }, FormMethod.Post,  new { @class = "form-horizontal", role = "form" }))
+            {
+                @Html.AntiForgeryToken()
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" class="btn btn-default" value="Delete" />
+                </div>
+            }
+        }*@
 

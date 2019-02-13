@@ -10,12 +10,16 @@ namespace ScrumProjekt.Models
         public List<PostModels> Posts { get; set; }
         public Dictionary<CategoryModels, bool> Categories { get; set; }
         public Forum Forum { get; set; }
+
         public int? ForumId { get; set; }
 
+
+        public List<Comment> CommentList { get; set; }
 
         public PostViewModels()
         {
             Posts = new List<PostModels>();
+            CommentList = new List<Comment>();
         }
     }
 }

@@ -22,22 +22,45 @@ namespace ScrumProjekt.Controllers
         }
 
         // GET: Forum
+
         [HttpGet]
+        [Authorize]
         public ActionResult Index(int? id, int[] filtrering)
         {
 
             ViewBag.Categories = DbContext.Categories.ToList();
+
+
+       
+
+            ViewBag.Categories = new SelectList(DbContext.Categories, "Id", "Name");
+            var tempComments = new List<Comment>();
 
             if (!id.HasValue)
             {
                 return View("Show");
             }
 
+
             var forum = DbContext.Forums.Where(i => i.Id == id).Include(p => p.Posts).Include("Posts.Category").Include("Posts.SenderId").FirstOrDefault();
 
+            var specifikaPosts = DbContext.Posts.Where(i => i.PostedForum.Id == id).ToList();
+
+            foreach(var p in specifikaPosts)
+            {
+                var tempList = DbContext.Comments.Where(c => c.Post.Id == p.Id).ToList();
+
+                foreach(var c in tempList)
+                {
+                    tempComments.Add(c);
+                }
+
+
+            }
             if (forum == null) {
                 return View("Show");
             }
+
 
             var listaAttSkicka = new List<CategoryModels>();
 
@@ -98,7 +121,9 @@ namespace ScrumProjekt.Controllers
                 Forum = forum,
                 Categories = categoryList,
                 ForumId = id
+                CommentList = tempComments
               
+
             };
 
             ViewBag.Id = id;
@@ -117,7 +142,7 @@ namespace ScrumProjekt.Controllers
 
         //}
         
-
+      
 
 
 

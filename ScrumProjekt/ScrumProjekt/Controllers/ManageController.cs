@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
@@ -15,9 +16,11 @@ namespace ScrumProjekt.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
+        private ApplicationDbContext DbContext;
 
         public ManageController()
         {
+            DbContext = new ApplicationDbContext();
         }
 
         public ManageController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
@@ -171,6 +174,7 @@ namespace ScrumProjekt.Controllers
 
         //
         // POST: /Manage/VerifyPhoneNumber
+        // plajsie
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> VerifyPhoneNumber(VerifyPhoneNumberViewModel model)
@@ -242,6 +246,45 @@ namespace ScrumProjekt.Controllers
             }
             AddErrors(result);
             return View(model);
+        }
+
+        public ActionResult Edit()
+        {
+            string UserName = User.Identity.Name;
+
+            var user = UserManager.FindById(User.Identity.GetUserId());
+
+            EditProfileViewModel model = new EditProfileViewModel();
+
+            model.FirstName = user.FirstName;
+            model.LastName = user.LastName;
+            model.Email = user.Email;
+
+            return View(model);
+        }
+
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> Edit(EditProfileViewModel editProfileViewModel)
+        {
+            if (ModelState.IsValid)
+            {
+                string UserName = User.Identity.Name;
+
+                var user = UserManager.FindById(User.Identity.GetUserId());
+
+                user.FirstName = editProfileViewModel.FirstName;
+                user.LastName = editProfileViewModel.LastName;
+                user.Email = editProfileViewModel.Email;
+
+                await UserManager.UpdateAsync(user);
+                DbContext.SaveChanges();
+                
+            }
+
+
+            return View(editProfileViewModel);
         }
 
         //
