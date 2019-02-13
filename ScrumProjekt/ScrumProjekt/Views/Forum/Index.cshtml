@@ -53,7 +53,10 @@
                     <p>@post.SenderId.FirstName</p>
                     <p>@post.SenderId.LastName</p>
                     <p>@post.TimeSent</p>
-                    <p>@post.Category.Name</p>
+                    @if (post.Category != null)
+                    {
+                        <p>@post.Category.Name</p>
+                    }
                     <p>@post.SenderId.Email</p>
 
                     @if (User.IsInRole("Admin") || User.Identity.GetUserId() == post.SenderId.Id)
