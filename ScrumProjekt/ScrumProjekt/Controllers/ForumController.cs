@@ -92,15 +92,16 @@ namespace ScrumProjekt.Controllers
                 
                     foreach (var c in listaAttSkicka)
                     {
-                    
-                        if(post.Category.Id == c.Id)
-                    {
-                        postLista.Add(post);
-                    }
+                       
+                        if(post.Category != null && post.Category.Id == c.Id)
+                        {
+                            postLista.Add(post);
+                        }
 
                     }
 
                 }
+            postLista.AddRange(forum.Posts.Where(m => m.Category == null));
             
             foreach(var category in DbContext.Categories)
             {

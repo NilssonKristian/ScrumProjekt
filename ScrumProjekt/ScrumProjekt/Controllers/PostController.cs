@@ -61,10 +61,7 @@ namespace ScrumProjekt.Controllers
             var forum = DbContext.Forums.Where(m => m.Id == post.ForumId).Include(p => p.Posts).SingleOrDefault();
             var category = DbContext.Categories.Where(m => m.Id == post.CategoryID).SingleOrDefault();
 
-            if(category == null)
-            {
-                return RedirectToAction("Index", "Forum", new { id = forum.Id });
-            }
+            
             var PostModel = new PostModels
             {
                 SenderId = UserManager.FindById(User.Identity.GetUserId()),
