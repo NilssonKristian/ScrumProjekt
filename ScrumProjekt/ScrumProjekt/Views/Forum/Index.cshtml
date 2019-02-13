@@ -121,55 +121,94 @@
                 <div class="row">
                     <div class="col-lg-6">
                         <ul class="list-unstyled mb-0">
-                            <li>
+                            <li id="CategoryList">
                                 @foreach (var c in Model.Categories)
                                 {
                                     <div class="form-group">
                                         <div class="custom-control custom-checkbox">
-                                            <input type="checkbox" class="custom-control-input" id="@c.Id">
-                                            <label class="custom-control-label" for="@c.Id"> @c.Name </label>
+                                            <input type="checkbox" class="custom-control-input" id="@c.Key.Id" checked="@c.Value">
+                                            <label class="custom-control-label" for="@c.Key.Id"> @c.Key.Name </label>
                                         </div>
                                     </div>
 
                                 }
 
-                                @Html.ActionLink("Filtrera", "Index", "Forum", new { id = ViewBag.Id, categories = Model.Categories})
+
+                                @*@using (Html.BeginForm())
+
+         {
+                        @Html.HiddenFor(m => m.Categories);
+
+                        <div class="col-md-offset-2 col-md-10">
+                            <input type = "submit" value="Send" class="btn btn-default" />
+                        </div>
+
+        }*@
 
 
 
 
 
 
-                            </li>
-
-                        </ul>
-                    </div>
-                </div>
-
-            </div>
-
-        </div>
-        <!-- /.row -->
 
 
-    </div>
+                                </ li >
 
-    <!-- /.container -->
-    <!-- Bootstrap core JavaScript -->
-    <script src="vendor/jquery/jquery.min.js"></script>
-    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+                                </ ul >
+                                </ div >
+                                </ div >
 
-    @section scripts {
+                                </ div >
 
-        <script>
-            $("#testButton").click(function () {
+                                </ div >
 
-                console.log("hej" + $('#1').is(':checked'));
+
+                                </ div >
+
+
+                                <script src="vendor/jquery/jquery.min.js"></script>
+                                <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+                                @section scripts {
+
+                          
+
+                                
+
+                                    
+
+                                    @*<script>
+                $("#testButton").click(function () {
+
+                    $(".card").empty();
+
+                    var tempCategories = @Model.Categories.Count;
+                    console.log(tempCategories);
+                    var categoriesToSend = [];
+
+                    for (i = 1; i < tempCategories; i++) {
+
+                        if (!$('#' + i).is(":checked")) {
+
+                            //categoriesToSend.push(i);
+                            console.log("hej");
+
+                        }
+
+                    }
+
+                    for (x = 0; x < categoriesToSend.length - 1; x++) {
+
+                        $(".card").append("hej");
+
+
+
+                    }
             });
-        </script>
+            </script>*@
 
 
-    }
+                                }
 
 </body>
 

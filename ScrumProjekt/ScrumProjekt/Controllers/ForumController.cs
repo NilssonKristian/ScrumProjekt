@@ -22,9 +22,10 @@ namespace ScrumProjekt.Controllers
         }
 
         // GET: Forum
-        public ActionResult Index(int? id, List<CategoryModels> categoryIdList = null)
+        [HttpGet]
+        public ActionResult Index(int? id, int[] filtrering)
         {
-
+            
             ViewBag.Categories = new SelectList(DbContext.Categories, "Id", "Name");
 
             if (!id.HasValue)
@@ -38,28 +39,63 @@ namespace ScrumProjekt.Controllers
                 return View("Show");
             }
 
-            var tempCategories = new List<CategoryModels>();
+            var listaAttSkicka = new List<CategoryModels>();
 
-            if (categoryIdList == null) { 
-             tempCategories = DbContext.Categories.ToList();
+            if (filtrering == null)
+            {
 
-            } else {
 
-                foreach (var i in categoryIdList) {
+                listaAttSkicka = DbContext.Categories.ToList();
+                listaAttSkicka.RemoveAt(1);
 
-                    var tempCategory = DbContext.Categories.SingleOrDefault(c => c == i);
-                    tempCategories.Add(tempCategory);
-                    System.Diagnostics.Debug.WriteLine(tempCategory.Id);
+            } else
+            {
 
+                foreach (var i in filtrering) {
+
+                    listaAttSkicka.Add(DbContext.Categories.SingleOrDefault(c => c.Id == i));
                 }
 
             }
 
+            var categoryList = new Dictionary<CategoryModels, bool>();
+            var postLista = new List<PostModels>();
+
+           
+                foreach(var c in listaAttSkicka)
+                {
+
+                    var tempPosts = forum.Posts.Where(p => Convert.ToInt32(p.CategoryPostModels) == c.Id);
+                
+                    foreach (var tp in tempPosts)
+                    {
+
+                        postLista.Add(tp);
+
+                    }
+
+                }
+            
+            foreach(var category in DbContext.Categories)
+            {
+                bool DoesContain = listaAttSkicka.Any(i => i.Id == category.Id);
+                if (DoesContain)
+                {
+                    categoryList.Add(category, true);
+                }
+                else
+                {
+                    categoryList.Add(category, false);
+                }
+            }
+
             var model = new PostViewModels
             {
-                Posts = forum.Posts.ToList(),
+                Posts = postLista,
                 Forum = forum,
-                Categories = tempCategories
+                Categories = categoryList,
+                ForumId = id
+              
             };
 
             ViewBag.Id = id;
@@ -68,16 +104,15 @@ namespace ScrumProjekt.Controllers
             return View("Index",model);
         }
 
+        //[HttpPost]
+        //public ActionResult Index(PostViewModels model)
+        //{
 
-        public ActionResult FilterCategories (List<int> categories)
-        {
-
-            ViewBag.CategoriesToRender = categories;
-
-            return RedirectToAction("Index");
+        //    System.Diagnostics.Debug.WriteLine(model.Forum.ForumName);
+        //    return View(model);
 
 
-        }
+        //}
         
 
 
