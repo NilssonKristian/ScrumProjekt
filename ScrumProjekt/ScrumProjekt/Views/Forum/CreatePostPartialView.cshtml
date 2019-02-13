@@ -22,7 +22,10 @@
         </div>
         <br />
         <div>
-            @Html.DropDownList("Categories", "Select a category")
+
+            @Html.DropDownListFor(m => m.CategoryID,
+new SelectList(ViewBag.Categories, "Id", "Name", null), "Välj kategori", null);
+
         </div>
         <br />
         @if (User.IsInRole("Admin"))
