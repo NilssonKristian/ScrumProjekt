@@ -63,7 +63,7 @@ namespace ScrumProjekt.Controllers
 
             if(category == null)
             {
-                return RedirectToAction("Index", "Forum", new { id = PostModel.PostedForum.Id });
+                return RedirectToAction("Index", "Forum", new { id = forum.Id });
             }
             var PostModel = new PostModels
             {
