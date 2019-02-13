@@ -58,6 +58,22 @@ namespace ScrumProjekt.Models
         public string ConfirmPassword { get; set; }
     }
 
+    public class EditProfileViewModel
+    {
+        [Required]
+        [Display(Name = "Firstname")]
+        public string FirstName { get; set; }
+
+        [Required]
+        [Display(Name = "Lastname")]
+        public string LastName { get; set; }
+
+        [Required]
+        [Display(Name = "Email")]
+        public string Email { get; set; }
+
+    }
+
     public class AddPhoneNumberViewModel
     {
         [Required]

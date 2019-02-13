@@ -91,6 +91,14 @@ namespace ScrumProjekt.Controllers
             }
         }
 
+        public ActionResult Edit()
+        {
+
+            
+
+            return View();
+        }
+
         //
         // GET: /Account/VerifyCode
         [AllowAnonymous]
