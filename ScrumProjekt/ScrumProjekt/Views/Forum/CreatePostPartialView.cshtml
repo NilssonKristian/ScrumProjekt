@@ -20,23 +20,33 @@
             @Html.EditorFor(model => Model.Content, new { htmlAttributes = new { @class = "form-control" } })
             @Html.ValidationMessageFor(model => Model.Content, "", new { @class = "text-danger" })
         </div>
+        <br />
         <div>
-            @Html.DropDownList( "Categories", "Select a category" )
+            @Html.DropDownList("Categories", "Select a category")
         </div>
+        <br />
+        @if (User.IsInRole("Admin"))
+        {
+            <div>
+                <button type="button" onclick="location.href='@Url.Action("Index", "Categories")'">Add a category</button>
+            </div>
+            <br />
+        }
         @Html.HiddenFor(model => Model.ForumId)
 
-    <div>
-        @Html.TextBoxFor(m => m.files, new { type = "file" })
-    </div>
-    <div>
-        @Html.TextBoxFor(m => m.files, new { type = "file" })
-    </div>
-    @Html.HiddenFor(model => Model.ForumId)
-
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Send" class="btn btn-default" />
+        <div>
+            @Html.TextBoxFor(m => m.files, new { type = "file" })
+        </div>
+        <br />
+        <div>
+            @Html.TextBoxFor(m => m.files, new { type = "file" })
+        </div>
+        @Html.HiddenFor(model => Model.ForumId)
+        <br />
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Send" class="btn btn-default" />
+            </div>
         </div>
     </div>
-</div>
 }

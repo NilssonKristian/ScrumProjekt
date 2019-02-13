@@ -78,8 +78,8 @@ namespace ScrumProjekt.Controllers
 
         
         
-        [HttpPost]
-        [ValidateAntiForgeryToken]
+        
+        
         [Authorize]
         public ActionResult Delete(int? id)
         {
@@ -89,23 +89,25 @@ namespace ScrumProjekt.Controllers
                 return RedirectToAction("Index", "Forum");
             }
             //post does not exist
-            var post = DbContext.Posts.Include(p => p.SenderId).SingleOrDefault(i => i.Id == id);
+            var post = DbContext.Posts.Include(p => p.SenderId).Include(p=>p.PostedForum).SingleOrDefault(i => i.Id == id);
             if (post == null)
             {
                 return RedirectToAction("Index", "Forum");
             }
             //User is not authenticated
-            if (post.SenderId.Id != User.Identity.GetUserId())
+            if (!(User.Identity.GetUserId() == post.SenderId.Id || User.IsInRole("Admin")))
             {
                 return RedirectToAction("Index", "Forum");
             }
+            var forum = post.PostedForum;
+
             //Remove from database
             DbContext.Posts.Remove(post);
             DbContext.SaveChanges();
 
 
 
-            return RedirectToAction("Index", "Forum");
+            return RedirectToAction("Index", "Forum", new { id = forum.Id });
         }
 
         [Authorize]
@@ -133,15 +135,20 @@ namespace ScrumProjekt.Controllers
                 return null;
             }
 
-            var dbpost = DbContext.Posts.Where(p => p.Id == id).Include(p => p.PostedForum).FirstOrDefault();
+            var dbpost = DbContext.Posts.Where(p => p.Id == id).Include(p => p.PostedForum).Include(p=>p.SenderId).FirstOrDefault();
 
             if (dbpost == null)
             {
                 return null;
             }
-            dbpost.Content = post.Content;
-            DbContext.SaveChanges();
 
+            if (    !(User.Identity.GetUserId() == dbpost.SenderId.Id || User.IsInRole("Admin")))
+            {
+                return null;
+            }
+                dbpost.Content = post.Content;
+                DbContext.SaveChanges();
+            
             return RedirectToAction("Index","Forum", new {id = dbpost.PostedForum.Id });
 
         }
