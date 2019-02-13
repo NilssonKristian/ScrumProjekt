@@ -8,6 +8,7 @@ namespace ScrumProjekt.Models
     public class PostViewModels
     {
         public List<PostModels> Posts { get; set; }
+        public List<CategoryModels> Categories { get; set; }
         public Forum Forum { get; set; }
 
         public PostViewModels()
