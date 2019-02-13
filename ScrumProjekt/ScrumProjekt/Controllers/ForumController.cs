@@ -33,7 +33,7 @@ namespace ScrumProjekt.Controllers
 
        
 
-            ViewBag.Categories = new SelectList(DbContext.Categories, "Id", "Name");
+            
             var tempComments = new List<Comment>();
 
             if (!id.HasValue)
@@ -120,7 +120,7 @@ namespace ScrumProjekt.Controllers
                 Posts = postLista,
                 Forum = forum,
                 Categories = categoryList,
-                ForumId = id
+                ForumId = id,
                 CommentList = tempComments
               
 

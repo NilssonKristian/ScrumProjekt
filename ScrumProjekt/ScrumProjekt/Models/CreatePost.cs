@@ -25,6 +25,7 @@ namespace ScrumProjekt.Models
         [System.Web.Mvc.HiddenInput(DisplayValue = false)]
         public int ForumId { get; set; }
 
+        [Required]
         public int CategoryID { get; set; }
 
     }
