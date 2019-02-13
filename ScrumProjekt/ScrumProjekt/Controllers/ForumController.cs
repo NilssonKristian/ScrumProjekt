@@ -25,15 +25,15 @@ namespace ScrumProjekt.Controllers
         [HttpGet]
         public ActionResult Index(int? id, int[] filtrering)
         {
-            
-            ViewBag.Categories = new SelectList(DbContext.Categories, "Id", "Name");
+
+            ViewBag.Categories = DbContext.Categories.ToList();
 
             if (!id.HasValue)
             {
                 return View("Show");
             }
 
-            var forum = DbContext.Forums.Where(i => i.Id == id).Include(p => p.Posts).Include("Posts.SenderId").FirstOrDefault();
+            var forum = DbContext.Forums.Where(i => i.Id == id).Include(p => p.Posts).Include("Posts.Category").Include("Posts.SenderId").FirstOrDefault();
 
             if (forum == null) {
                 return View("Show");
@@ -46,7 +46,7 @@ namespace ScrumProjekt.Controllers
 
 
                 listaAttSkicka = DbContext.Categories.ToList();
-                listaAttSkicka.RemoveAt(1);
+                
 
             } else
             {
@@ -62,15 +62,18 @@ namespace ScrumProjekt.Controllers
             var postLista = new List<PostModels>();
 
            
-                foreach(var c in listaAttSkicka)
+                foreach(var post in forum.Posts)
                 {
 
-                    var tempPosts = forum.Posts.Where(p => Convert.ToInt32(p.CategoryPostModels) == c.Id);
+                    
                 
-                    foreach (var tp in tempPosts)
+                    foreach (var c in listaAttSkicka)
                     {
-
-                        postLista.Add(tp);
+                    
+                        if(post.Category.Id == c.Id)
+                    {
+                        postLista.Add(post);
+                    }
 
                     }
 

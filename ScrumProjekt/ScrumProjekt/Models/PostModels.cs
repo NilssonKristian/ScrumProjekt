@@ -17,7 +17,7 @@ namespace ScrumProjekt.Models
         public DateTime TimeSent { get; set; }
         public List<File> Files { get; set; }
         public Forum PostedForum { get; set; }
-        public string CategoryPostModels { get; set; }
+        public CategoryModels Category { get; set; }
 
     }
 }

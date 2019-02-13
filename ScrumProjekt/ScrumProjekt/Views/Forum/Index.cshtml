@@ -43,7 +43,7 @@
                 </div>
                 <div class="card-footer text-muted">
                     <p>@post.TimeSent</p>
-                    <p>@post.CategoryPostModels</p>
+                    <p>@post.Category.Name</p>
                     <p>@post.SenderId.Email</p>
 
                     <button type="button" onclick="location.href='@Url.Action("Edit", "Post")'">Edit</button>
@@ -101,18 +101,7 @@
     <!-- Sidebar Widgets Column -->
     <div class="col-4">
 
-        <!-- Search Widget -->
-        <div class="card my-4">
-            <h5 class="card-header">Search</h5>
-            <div class="card-body">
-                <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Search for...">
-                    <span class="input-group-btn">
-                        <button class="btn btn-secondary" type="button">Go!</button>
-                    </span>
-                </div>
-            </div>
-        </div>
+        
 
         <!-- Categories Widget -->
         <div class="card my-4">
@@ -126,7 +115,7 @@
                                 {
                                     <div class="form-group">
                                         <div class="custom-control custom-checkbox">
-                                            <input type="checkbox" class="custom-control-input" id="@c.Key.Id" checked="@c.Value">
+                                            <input type="checkbox" class="custom-control-input" id="@c.Key.Id" checked="@c.Value" />
                                             <label class="custom-control-label" for="@c.Key.Id"> @c.Key.Name </label>
                                         </div>
                                     </div>
@@ -134,81 +123,59 @@
                                 }
 
 
-                                @*@using (Html.BeginForm())
+                            </li>
 
-         {
-                        @Html.HiddenFor(m => m.Categories);
+                        </ul>
+                    </div>
+                </div>
 
-                        <div class="col-md-offset-2 col-md-10">
-                            <input type = "submit" value="Send" class="btn btn-default" />
-                        </div>
-
-        }*@
-
+            </div>
+            <button class="btn btn-secondary" type="button" id="CategoryGoBtn">Go!</button>
+        </div>
 
 
-
-
-
-
-
-                                </ li >
-
-                                </ ul >
-                                </ div >
-                                </ div >
-
-                                </ div >
-
-                                </ div >
-
-
-                                </ div >
+    </div >
 
 
                                 <script src="vendor/jquery/jquery.min.js"></script>
                                 <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-                                @section scripts {
+ @section scripts {
+     <script>
+         $(document).ready(function () {
+             $("#CategoryGoBtn").click(function () {
+                 BtnClick();
+             });
+         });
 
+         function BtnClick() {
+             var list = []
+             $("#CategoryList").find("input:checked").each(function (element) {
+                 list.push($(this).attr('id'));
+                
+             })
+
+             console.log(list);
+
+             var urlString = "";
+             for (var i = 0; i < list.length; i++) {
+                 urlString += "&filtrering=" + list[i];
+             }
+             var url = window.location.href.split("?")[0] + "?" + urlString;
+             window.location.href = url
+         }
+
+     </script>
                           
 
                                 
 
                                     
 
-                                    @*<script>
-                $("#testButton").click(function () {
-
-                    $(".card").empty();
-
-                    var tempCategories = @Model.Categories.Count;
-                    console.log(tempCategories);
-                    var categoriesToSend = [];
-
-                    for (i = 1; i < tempCategories; i++) {
-
-                        if (!$('#' + i).is(":checked")) {
-
-                            //categoriesToSend.push(i);
-                            console.log("hej");
-
-                        }
-
-                    }
-
-                    for (x = 0; x < categoriesToSend.length - 1; x++) {
-
-                        $(".card").append("hej");
+                                  
 
 
-
-                    }
-            });
-            </script>*@
-
-
-                                }
+ }
 
 </body>
 

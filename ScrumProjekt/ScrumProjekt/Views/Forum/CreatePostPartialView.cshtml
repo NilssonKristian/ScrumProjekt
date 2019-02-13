@@ -21,7 +21,8 @@
             @Html.ValidationMessageFor(model => Model.Content, "", new { @class = "text-danger" })
         </div>
         <div>
-            @Html.DropDownList( "Categories", "Select a category" )
+            @Html.DropDownListFor(m => m.CategoryID,
+new SelectList(ViewBag.Categories, "Id", "Name", null), "Välj kategori", null);
         </div>
         @Html.HiddenFor(model => Model.ForumId)
 

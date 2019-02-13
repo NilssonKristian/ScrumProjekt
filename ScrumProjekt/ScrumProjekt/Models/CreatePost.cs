@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 
 namespace ScrumProjekt.Models
 {
@@ -14,7 +15,9 @@ namespace ScrumProjekt.Models
 
         }
         public List<HttpPostedFileBase> files { get; set; }
-        public IEnumerable<CategoryModels> CategoriesToPost{ get; set; }
+        
+
+
 
         [DataType(DataType.MultilineText)]
         public string Content { get; set; }
@@ -22,7 +25,7 @@ namespace ScrumProjekt.Models
         [System.Web.Mvc.HiddenInput(DisplayValue = false)]
         public int ForumId { get; set; }
 
-        public CategoryModels CategoryCreatePost { get; set; }
+        public int CategoryID { get; set; }
 
     }
 }
