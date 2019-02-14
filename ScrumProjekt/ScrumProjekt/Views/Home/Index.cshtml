@@ -1,23 +1,102 @@
-﻿@using Microsoft.AspNet.Identity
-
+﻿@using ScrumProjekt.Models
+@model LoginViewModel
 @{
     ViewBag.Title = "Home Page";
 }
 
 
+<Edit in JSFiddle
+      Result
+      HTML
+      CSS
+      JavaScript
+      Resources
+<!-- This snippet uses Font Awesome 5 Free as a dependency. You can download it at fontawesome.io! -->
+    <body>
+        <section id="loginForm">
+@using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    @Html.AntiForgeryToken()
 
+    <div class="container">
 
-<div class="jumbotron" style="margin-top: 40px;">
-    <h1>Startelvan</h1>
-    <p class="lead">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</p>
+    <div class="row">
     @if (!Request.IsAuthenticated)
     {
-         @Html.ActionLink("Logga in", "Login", "Account", null, new { @class = "btn btn-primary btn-lg", style = "margin-right: 20px;" })
+        <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+        <div class="card card-signin my-5">
+        <div class="card-body">
 
+        <h5 class="card-title text-center">Logga in</h5>
+        <hr />
 
-         @Html.ActionLink("Registrera ett konto", "Register", "Account", null, new { @class = "btn btn-primary btn-lg" })
+        <!--Username-->
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
+        <form class="form-signin">
+        <div class="form-label-group">
+        @Html.TextBoxFor(m => m.Email, new { @class = "form-control", placeholder = "Email address" })
+        @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+        </div>
+
+        <!--Password-->
+        <div class="form-label-group">
+        @Html.PasswordFor(m => m.Password, new { @class = "form-control", placeholder = "Password" })
+        @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="custom-control custom-checkbox mb-3">
+
+        @Html.CheckBoxFor(m => m.RememberMe, new { @class = "custom-control-input" })
+        @Html.LabelFor(m => m.RememberMe, new { @class = "custom-control-label" })
+        </div>
+
+        @*<input type="submit" value="Log in" class="btn btn-primary btn-lg btn-block text-uppercase" style = "margin-right: 20px;" />*@
+       
+        <input type="submit" value="Log in" class="btn btn-primary btn-lg btn-block text-uppercase" />
+        @Html.ActionLink("Registrera ett konto", "Register", "Account", null, new { @class = "btn btn-primary btn-lg btn-block text-uppercase" })
+        <hr class="my-4">
+        </form>
+        </div>
+        </div>
+
+        </div>
     }
+    else
+    {
+        <header>
+        <div class="overlay">
+        <video playsinline="playsinline" autoplay="autoplay" muted="muted" loop="loop">
+        <source src="https://storage.googleapis.com/coverr-main/mp4/Mt_Baker.mp4" type="video/mp4">
+        </video>
+        <div class="container h-100">
+        <div class="d-flex h-100 text-center align-items-center">
+        <div class="w-100 text-white">
+        <h1 class="display-3">STARTELVAN</h1>
+        <p class="lead mb-0">Enterprise</p>
+        </div>
+        </div>
+        </div>
+        </header>
+    }
+    </div>
 
-</div>
 
+    </div>
+
+
+}
+    </section>
+
+        </body>
+
+@*<div class="col-md-4">
+        <section id="socialLoginForm">
+            @Html.Partial("_ExternalLoginsListPartial", new ExternalLoginListViewModel { ReturnUrl = ViewBag.ReturnUrl })
+        </section>
+    </div>*@
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
