@@ -59,7 +59,7 @@ namespace ScrumProjekt.Controllers
                 }
             }
             
-            var forum = DbContext.Forums.Where(m => m.Id == post.ForumId).Include(p => p.Posts).SingleOrDefault();
+            var forum = DbContext.Forums.Where(m => m.Id == post.ForumId).Include(p => p.Posts).Include(p => p.Subscribers).SingleOrDefault();
             var category = DbContext.Categories.Where(m => m.Id == post.CategoryID).SingleOrDefault();
 
             
@@ -91,7 +91,7 @@ namespace ScrumProjekt.Controllers
                     message.IsBodyHtml = true;
                     using (var smtp = new SmtpClient())
                     {
-                        smtp.SendMailAsync(message);
+                        smtp.Send(message);
                         
                     }
                 }

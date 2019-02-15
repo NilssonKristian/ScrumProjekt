@@ -7,6 +7,7 @@ namespace ScrumProjekt.Models
 {
     public class PostViewModels
     {
+        public ApplicationUser User { get; set; }
         public List<PostModels> Posts { get; set; }
         public Dictionary<CategoryModels, bool> Categories { get; set; }
         public Forum Forum { get; set; }
