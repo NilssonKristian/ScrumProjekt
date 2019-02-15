@@ -4,7 +4,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }*@
 
-<h2>Lägg till nya kategorier</h2>
+<h2>Add a new category</h2>
 
 @using (Html.BeginForm("AddCategory", "Categories", FormMethod.Post, new { @class = "form-horizontal", role = "form", encType = "multipart/form-data" }))
 {
@@ -19,7 +19,7 @@
 
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Send" class="btn btn-default" />
+            <input type="submit" value="Add" class="btn btn-default" />
         </div>
     </div>
 
