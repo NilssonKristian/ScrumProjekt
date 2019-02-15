@@ -48,7 +48,8 @@
                             <h2 class="card-title">Post Title</h2>
                             <p class="lead">
                                 By
-                                <a href="#">@post.SenderId.Email</a>
+                                @*<a href="#">@post.SenderId.Email</a>*@
+                                <a href="#">@post.SenderId.FirstName @post.SenderId.LastName </a>
                             </p>
                             <hr />
                             <p>Posted on @post.TimeSent </p>
@@ -84,7 +85,7 @@
                                 <div class="media mb-0">
                                     @*<img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">*@
                                     <div class="media-body">
-                                        <span class="badge badge-primary"><b>@post.SenderId.Email</b></span>
+                                        <span class="badge badge-primary"><b>@post.SenderId.FirstName @post.SenderId.LastName</b></span>
                                         @*<h5 class="mt-0"><b>@post.SenderId.Email</b></h5>*@
                                         @comment.Content
                                     </div>
