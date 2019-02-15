@@ -1,0 +1,31 @@
+﻿@model ScrumProjekt.Models.EditProfileViewModel
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Ändra dina kontoinställningar</h2>
+
+@using (Html.BeginForm("Edit", "Manage", FormMethod.Post))
+{
+
+    @Html.AntiForgeryToken()
+
+    @Html.LabelFor(model => Model.FirstName, new { @class = "col-md-2 control-label" })
+    <div>
+        @Html.EditorFor(model => model.FirstName, new { @class = "form-control" })
+    </div>
+    @Html.LabelFor(model => model.LastName, new { @class = "col-md-2 control-label" })
+    <div>
+        @Html.EditorFor(model => model.LastName, new { @class = "form-control" })
+    </div>
+    @Html.LabelFor(model => model.Email, new { @class = "col-md-2 control-label" })
+    <div>
+        @Html.EditorFor(model => model.Email, new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Change Information" class="btn btn-default" />
+        </div>
+    </div>
+}

@@ -8,35 +8,79 @@
 
 @using (Html.BeginForm("Create", "Post", FormMethod.Post, new { @class = "form-horizontal", role = "form", encType = "multipart/form-data" }))
 {
-    
+
     @Html.AntiForgeryToken()
 
-@*<div class="form-horizontal">*@
-    <hr />
-    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-    <div class="form-group">
-        @Html.LabelFor(model => Model.Content, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => Model.Content, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => Model.Content, "", new { @class = "text-danger" })
-        </div>
-        <div>
-            @Html.DropDownList( "Categories", "Select a category" )
-        </div>
-        @Html.HiddenFor(model => Model.ForumId)
+    @*<div class="form-horizontal">*@
 
-    <div>
-        @Html.TextBoxFor(m => m.files, new { type = "file" })
-    </div>
-    <div>
-        @Html.TextBoxFor(m => m.files, new { type = "file" })
-    </div>
-    @Html.HiddenFor(model => Model.ForumId)
 
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Send" class="btn btn-default" />
+    <div class="container">
+        <div class="row">
+            <div class="col-md-offset-3 col-md-6 col-xs-12">
+                <div class="well well-sm well-social-post">
+                    <form>
+                        <ul class="list-inline" id='list_PostActions'>
+                            <li class='active'><a href='#'>Create Post</a></li>
+                        </ul>
+
+                        <!--CREATE POST-->
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        <div class="form-group">
+                            @Html.LabelFor(model => Model.Content, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => Model.Content, new { htmlAttributes = new { @class = "form-control", placeholder = "What's in your mind?" } })
+                                @Html.ValidationMessageFor(model => Model.Content, "", new { @class = "text-danger" })
+                            </div>
+                            <br />
+                        </div>
+                        <!--FILE UPLOADER-->
+                        <ul class='list-inline post-actions'>
+                            <!--KATEGORI DROPDOWN-->
+
+
+
+                            @Html.DropDownListFor(m => m.CategoryID,
+                          new SelectList(ViewBag.Categories, "Id", "Name", null), "Välj kategori", null)
+                            <!--FILE ONE-->
+                            <div>
+                                @Html.HiddenFor(model => Model.ForumId)
+
+                                @Html.TextBoxFor(m => m.files, new { type = "file" })
+
+                                <!--FILE TWO-->
+                                @Html.TextBoxFor(m => m.files, new { type = "file" })
+
+                                @Html.HiddenFor(model => Model.ForumId)
+
+                                <div>
+                                    <!--ADD CATEGORY-->
+                                    @if (User.IsInRole("Admin"))
+                                    {
+
+                                        <button type="button" onclick="location.href='@Url.Action("Index", "Categories")'">Add a category</button>
+
+                                        <br />
+                                    }
+                                </div>
+
+                                <!-- SEND BUTTON -->
+                                <div>
+                                    <input type="submit" value="Send" class="btn btn-primary" />
+                                </div>
+                            </div>
+                        </ul>
+                    </form>
+                </div>
+            </div>
         </div>
     </div>
-</div>
 }
+
+<script src="vendor/jquery/jquery.min.js"></script>
+<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+@section scripts {
+    <script>
+
+    </script>
+     }

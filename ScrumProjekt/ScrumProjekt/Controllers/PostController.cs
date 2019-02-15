@@ -60,7 +60,9 @@ namespace ScrumProjekt.Controllers
             }
             
             var forum = DbContext.Forums.Where(m => m.Id == post.ForumId).Include(p => p.Posts).SingleOrDefault();
-            var category = Request.Form["Categories"].ToString();
+            var category = DbContext.Categories.Where(m => m.Id == post.CategoryID).SingleOrDefault();
+
+            
             var PostModel = new PostModels
             {
                 SenderId = UserManager.FindById(User.Identity.GetUserId()),
@@ -68,7 +70,7 @@ namespace ScrumProjekt.Controllers
                 TimeSent = DateTime.Now,
                 Files = tempFiles,
                 PostedForum = forum,
-                CategoryPostModels = category
+                Category = category
             };
 
             DbContext.Posts.Add(PostModel);
@@ -101,8 +103,8 @@ namespace ScrumProjekt.Controllers
 
         
         
-        [HttpPost]
-        [ValidateAntiForgeryToken]
+        
+        
         [Authorize]
         public ActionResult Delete(int? id)
         {
@@ -112,23 +114,25 @@ namespace ScrumProjekt.Controllers
                 return RedirectToAction("Index", "Forum");
             }
             //post does not exist
-            var post = DbContext.Posts.Include(p => p.SenderId).SingleOrDefault(i => i.Id == id);
+            var post = DbContext.Posts.Include(p => p.SenderId).Include(p=>p.PostedForum).SingleOrDefault(i => i.Id == id);
             if (post == null)
             {
                 return RedirectToAction("Index", "Forum");
             }
             //User is not authenticated
-            if (post.SenderId.Id != User.Identity.GetUserId())
+            if (!(User.Identity.GetUserId() == post.SenderId.Id || User.IsInRole("Admin")))
             {
                 return RedirectToAction("Index", "Forum");
             }
+            var forum = post.PostedForum;
+
             //Remove from database
             DbContext.Posts.Remove(post);
             DbContext.SaveChanges();
 
 
 
-            return RedirectToAction("Index", "Forum");
+            return RedirectToAction("Index", "Forum", new { id = forum.Id });
         }
 
         [Authorize]
@@ -156,18 +160,53 @@ namespace ScrumProjekt.Controllers
                 return null;
             }
 
-            var dbpost = DbContext.Posts.Where(p => p.Id == id).Include(p => p.PostedForum).FirstOrDefault();
+            var dbpost = DbContext.Posts.Where(p => p.Id == id).Include(p => p.PostedForum).Include(p=>p.SenderId).FirstOrDefault();
 
             if (dbpost == null)
             {
                 return null;
             }
-            dbpost.Content = post.Content;
-            DbContext.SaveChanges();
 
+            if (    !(User.Identity.GetUserId() == dbpost.SenderId.Id || User.IsInRole("Admin")))
+            {
+                return null;
+            }
+                dbpost.Content = post.Content;
+                DbContext.SaveChanges();
+            
             return RedirectToAction("Index","Forum", new {id = dbpost.PostedForum.Id });
 
         }
+
+        [HttpPost]
+        public ActionResult PostComment(CommentViewModel comment)
+        {
+
+
+            var post = DbContext.Posts.Where(p => p.Id == comment.PostID).Include(p => p.PostedForum).FirstOrDefault();
+            if (post == null) {
+                //Gör något, posten finns inte
+            }
+            
+                var c = new Comment
+                {
+                    User = UserManager.FindById(User.Identity.GetUserId()),
+                    Content = comment.Content,
+                    TimeSent = DateTime.Now,
+                    Post = post
+                };
+
+                
+            
+        
+                DbContext.Comments.Add(c);
+                DbContext.SaveChanges();
+
+            return RedirectToAction("Index", "Forum", new { id = post.PostedForum.Id });
+
+        }
+
+
 
 
     }

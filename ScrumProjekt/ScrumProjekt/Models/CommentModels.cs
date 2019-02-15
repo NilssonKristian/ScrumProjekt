@@ -6,18 +6,15 @@ using System.Web;
 
 namespace ScrumProjekt.Models
 {
-    public class PostModels
+    public class Comment
     {
         [Key]
         public int Id { get; set; }
-
-        public ApplicationUser SenderId { get; set; }
-        [DataType(DataType.MultilineText)]
+    
         public string Content { get; set; }
         public DateTime TimeSent { get; set; }
-        public List<File> Files { get; set; }
-        public Forum PostedForum { get; set; }
-        public CategoryModels Category { get; set; }
-
+        public PostModels Post { get; set; }
+        public ApplicationUser User { get; set; }
+       
     }
 }
