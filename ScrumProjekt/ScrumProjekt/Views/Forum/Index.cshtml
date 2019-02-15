@@ -106,11 +106,11 @@
                 {
                     if (Model.User.Subscriptions.Any(p => p.Id == Model.Forum.Id))
                     {
-                        @Html.ActionLink("Unsubscribe", "UnSubscribe", new { ForumID = Model.Forum.Id }, new { @Class="btn"});
+                        @Html.ActionLink("Unsubscribe", "UnSubscribe", new { ForumID = Model.Forum.Id }, new { @Class= "btn btn-primary btn-lg btn-block" });
                     }
                     else
                     {
-                        @Html.ActionLink("Subscribe", "Subscribe", new { ForumID = Model.Forum.Id });
+                        @Html.ActionLink("Subscribe", "Subscribe", new { ForumID = Model.Forum.Id }, new { @Class = "btn btn-primary btn-lg btn-block" });
                     }
                 }
 
