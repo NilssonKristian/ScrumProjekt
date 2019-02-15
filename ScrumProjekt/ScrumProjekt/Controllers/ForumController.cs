@@ -115,6 +115,8 @@ namespace ScrumProjekt.Controllers
                     categoryList.Add(category, false);
                 }
             }
+            var userid = User.Identity.GetUserId();
+            var user = DbContext.Users.Where(p => p.Id == userid).Include(p => p.Subscriptions).FirstOrDefault();
 
             var model = new PostViewModels
             {
@@ -122,7 +124,8 @@ namespace ScrumProjekt.Controllers
                 Forum = forum,
                 Categories = categoryList,
                 ForumId = id,
-                CommentList = tempComments
+                CommentList = tempComments,
+                User = user
               
 
             };
@@ -144,7 +147,8 @@ namespace ScrumProjekt.Controllers
 
             var forum = DbContext.Forums.Where(p => p.Id == ForumID).Include(p => p.Subscribers).FirstOrDefault();
 
-            var user = DbContext.Users.Where(p => p.Id == User.Identity.GetUserId()).FirstOrDefault();
+            var userid = User.Identity.GetUserId();
+            var user = DbContext.Users.Where(p => p.Id == userid).FirstOrDefault();
 
             if (!forum.AllowPushNotifications)
             {
@@ -175,8 +179,8 @@ namespace ScrumProjekt.Controllers
                 }
 
                 var forum = DbContext.Forums.Where(p => p.Id == ForumID).Include(p => p.Subscribers).FirstOrDefault();
-
-                var user = DbContext.Users.Where(p => p.Id == User.Identity.GetUserId()).FirstOrDefault();
+            var userid = User.Identity.GetUserId();
+            var user = DbContext.Users.Where(p => p.Id == userid).FirstOrDefault();
 
                 
                 //Is not subsribed

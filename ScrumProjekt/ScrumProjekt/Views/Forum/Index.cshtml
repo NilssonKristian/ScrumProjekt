@@ -101,6 +101,20 @@
 
             <!-- Sidebar Widgets Column -->
             <div class="col-4">
+                
+                @if (Model.Forum.AllowPushNotifications)
+                {
+                    if (Model.User.Subscriptions.Any(p => p.Id == Model.Forum.Id))
+                    {
+                        @Html.ActionLink("Unsubscribe", "UnSubscribe", new { ForumID = Model.Forum.Id }, new { @Class="btn"});
+                    }
+                    else
+                    {
+                        @Html.ActionLink("Subscribe", "Subscribe", new { ForumID = Model.Forum.Id });
+                    }
+                }
+
+
                 <!-- Categories Widget -->
                 <div class="card my-4">
                     <h5 class="card-header">Categories</h5>
