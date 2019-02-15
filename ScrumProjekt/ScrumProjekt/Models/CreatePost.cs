@@ -15,9 +15,9 @@ namespace ScrumProjekt.Models
 
         }
         public List<HttpPostedFileBase> files { get; set; }
-        
 
-
+        [Required(ErrorMessage = "You have to enter a title")]
+        public string Title { get; set; }
 
         [DataType(DataType.MultilineText)]
         public string Content { get; set; }

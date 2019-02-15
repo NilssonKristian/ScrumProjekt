@@ -16,6 +16,7 @@
         <span class="close">&times;</span>
         @Html.Partial("CreatePostPartialView", new CreatePost { ForumId = Model.Forum.Id })
     </div>
+    <br />
     <!-- Page Content -->
     <div class="container">
 
@@ -32,21 +33,16 @@
                     <div class="card mb-4">
 
                         <div class="card-body">
-                            <h2 class="card-title">Post Title</h2>
+                            <h3 class="card-title">@post.Title</h3>
                             <p class="lead">
-                                By
-                                @*<a href="#">@post.SenderId.Email</a>*@
-                                <a href="#">@post.SenderId.FirstName @post.SenderId.LastName </a>
-                            </p>
-                            <hr />
-                            <p>Posted on @post.TimeSent </p>
-
+                                <p>By @post.SenderId.FirstName @post.SenderId.LastName</p>
                             <hr />
                             <p class="card-text">@post.Content</p>
                             <hr />
+                            <p>Posted on @post.TimeSent <p>
                             @if (post.Category != null)
                             {
-                                <p><b><I>@post.Category.Name</I></b></p>
+                                <p>@post.Category.Name</p>
                             }
                         </div>
                         <div class="card-footer text-muted">
