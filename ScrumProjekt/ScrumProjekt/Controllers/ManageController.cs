@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
@@ -55,7 +56,7 @@ namespace ScrumProjekt.Controllers
 
         //
         // GET: /Manage/Index
-        public async Task<ActionResult> Index(ManageMessageId? message)
+        public async Task<ActionResult> Index(ManageMessageId? message, int[] filtrering = null)
         {
             ViewBag.StatusMessage =
                 message == ManageMessageId.ChangePasswordSuccess ? "Your password has been changed."
@@ -67,13 +68,25 @@ namespace ScrumProjekt.Controllers
                 : "";
 
             var userId = User.Identity.GetUserId();
+            var CategoryD = new Dictionary<CategoryModels, bool>();
+
+            var excludeList = DbContext.excludes.Where(e => e.User.Id == userId).ToList();
+
+
+
+            foreach (var c in DbContext.Categories.ToList())
+            {
+                CategoryD.Add(c, true);
+
+            }
             var model = new IndexViewModel
             {
                 HasPassword = HasPassword(),
                 PhoneNumber = await UserManager.GetPhoneNumberAsync(userId),
                 TwoFactor = await UserManager.GetTwoFactorEnabledAsync(userId),
                 Logins = await UserManager.GetLoginsAsync(userId),
-                BrowserRemembered = await AuthenticationManager.TwoFactorBrowserRememberedAsync(userId)
+                BrowserRemembered = await AuthenticationManager.TwoFactorBrowserRememberedAsync(userId),
+                Categories = CategoryD
             };
             return View(model);
         }

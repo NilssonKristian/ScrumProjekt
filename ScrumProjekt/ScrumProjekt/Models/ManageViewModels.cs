@@ -12,6 +12,8 @@ namespace ScrumProjekt.Models
         public string PhoneNumber { get; set; }
         public bool TwoFactor { get; set; }
         public bool BrowserRemembered { get; set; }
+        public ExcludeModel exclude { get; set; }
+        public Dictionary<CategoryModels, bool> Categories { get; set; }
     }
 
     public class ManageLoginsViewModel
