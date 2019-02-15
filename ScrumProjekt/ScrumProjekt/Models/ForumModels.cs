@@ -15,6 +15,10 @@ namespace ScrumProjekt.Models
 
         public String ForumName { get; set; }
 
+        public List<ApplicationUser> Subscribers { get; set; }
+
+        public Boolean AllowPushNotifications { get; set; }
+
     }
 
     

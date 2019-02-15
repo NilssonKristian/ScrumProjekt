@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Net.Mail;
 using System.Web;
 using System.Web.Mvc;
 
@@ -74,6 +75,28 @@ namespace ScrumProjekt.Controllers
 
             DbContext.Posts.Add(PostModel);
             DbContext.SaveChanges();
+
+
+
+            //Notify
+            if (forum.AllowPushNotifications)
+            {
+                foreach (var subscriber in forum.Subscribers)
+                {
+                    var body = "<p> {0} ({1})</p><p>Message:</p><p>{2}</p>";
+                    var message = new MailMessage();
+                    message.To.Add(new MailAddress(subscriber.Email)); //replace with valid value
+                    message.Subject = "Email Notifaction";
+                    message.Body = string.Format(body, PostModel.SenderId.FirstName, PostModel.SenderId.Email, PostModel.Content);
+                    message.IsBodyHtml = true;
+                    using (var smtp = new SmtpClient())
+                    {
+                        smtp.SendMailAsync(message);
+                        
+                    }
+                }
+            }
+            
 
             return RedirectToAction("Index", "Forum", new { id=PostModel.PostedForum.Id});
         }

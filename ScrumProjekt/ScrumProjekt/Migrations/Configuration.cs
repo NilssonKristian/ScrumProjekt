@@ -73,7 +73,8 @@ namespace ScrumProjekt.Migrations
                 
                 var forum = new Forum
                 {
-                    ForumName = "Formellt Forum"
+                    ForumName = "Formellt Forum",
+                    AllowPushNotifications = false
 
                 };
 
@@ -87,7 +88,8 @@ namespace ScrumProjekt.Migrations
                 
                 var forum = new Forum
                 {
-                    ForumName = "Informellt Forum"
+                    ForumName = "Informellt Forum",
+                    AllowPushNotifications = false
 
                 };
 
@@ -100,7 +102,8 @@ namespace ScrumProjekt.Migrations
                 
                 var forum = new Forum
                 {
-                    ForumName = "Forskning"
+                    ForumName = "Forskning",
+                    AllowPushNotifications = true
 
                 };
 
@@ -113,8 +116,8 @@ namespace ScrumProjekt.Migrations
 
                 var forum = new Forum
                 {
-                    ForumName = "Utbildning"
-
+                    ForumName = "Utbildning",
+                    AllowPushNotifications = true
                 };
 
                 context.Forums.Add(forum);
