@@ -56,7 +56,7 @@ namespace ScrumProjekt.Controllers
 
         //
         // GET: /Manage/Index
-        public async Task<ActionResult> Index(ManageMessageId? message, int[] filtrering = null)
+        public async Task<ActionResult> Index(ManageMessageId? message, int?[] filtrering = null)
         {
             ViewBag.StatusMessage =
                 message == ManageMessageId.ChangePasswordSuccess ? "Your password has been changed."
@@ -69,16 +69,70 @@ namespace ScrumProjekt.Controllers
 
             var userId = User.Identity.GetUserId();
             var CategoryD = new Dictionary<CategoryModels, bool>();
+            var tempCategoryList = DbContext.Categories.ToList();
+            var cUser = UserManager.FindById(userId);
+            
 
-            var excludeList = DbContext.excludes.Where(e => e.User.Id == userId).ToList();
-
-
-
-            foreach (var c in DbContext.Categories.ToList())
+            if (filtrering != null)
             {
-                CategoryD.Add(c, true);
+                
+
+                foreach (var f in filtrering)
+                {
+
+
+                    var Category = DbContext.Categories.SingleOrDefault(c => c.Id == f);
+                    tempCategoryList.Remove(Category);
+
+                }
+            } else
+            {
+
+                tempCategoryList.Clear();
 
             }
+            if (tempCategoryList.Count() > 0)
+            {
+                
+                foreach (var c in tempCategoryList)
+                {
+                    if (cUser.Excludes.Any(e => e.Id == c.Id) == false)
+                    {
+
+                        cUser.Excludes.Add(c);
+                        DbContext.SaveChanges();
+
+                    }
+                  
+
+                }
+            }
+
+            var excludeList = cUser.Excludes;
+
+            if (excludeList.Count() == 0 && filtrering == null)
+            {
+
+                foreach (var c in DbContext.Categories.ToList())
+                {
+                    CategoryD.Add(c, true);
+
+                }
+
+            } else
+            {
+
+                foreach (var f in filtrering)
+                {
+
+                    var tempCategory = DbContext.Categories.SingleOrDefault(c => c.Id == f);
+                    CategoryD.Add(tempCategory, false);
+
+                }
+
+            }
+
+
             var model = new IndexViewModel
             {
                 HasPassword = HasPassword(),
