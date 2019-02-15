@@ -4,7 +4,9 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Ändra dina kontoinställningar</h2>
+<br />
+<h2>Change your account information</h2>
+<hr />
 
 @using (Html.BeginForm("Edit", "Manage", FormMethod.Post))
 {
@@ -15,14 +17,17 @@
     <div>
         @Html.EditorFor(model => model.FirstName, new { @class = "form-control" })
     </div>
+    <br />
     @Html.LabelFor(model => model.LastName, new { @class = "col-md-2 control-label" })
     <div>
         @Html.EditorFor(model => model.LastName, new { @class = "form-control" })
     </div>
+    <br />
     @Html.LabelFor(model => model.Email, new { @class = "col-md-2 control-label" })
     <div>
         @Html.EditorFor(model => model.Email, new { @class = "form-control" })
     </div>
+    <br />
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
             <input type="submit" value="Change Information" class="btn btn-default" />
