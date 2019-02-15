@@ -68,12 +68,12 @@ namespace ScrumProjekt.Migrations
                 
             }
 
-            if (!context.Forums.Any(u => u.ForumName == "Formellt Forum"))
+            if (!context.Forums.Any(u => u.ForumName == "Formal Forum"))
             {
                 
                 var forum = new Forum
                 {
-                    ForumName = "Formellt Forum",
+                    ForumName = "Formal Forum",
                     AllowPushNotifications = false
 
                 };
@@ -83,12 +83,12 @@ namespace ScrumProjekt.Migrations
 
             }
             
-            if (!context.Forums.Any(u => u.ForumName == "Informellt Forum"))
+            if (!context.Forums.Any(u => u.ForumName == "Informal Forum"))
             {
                 
                 var forum = new Forum
                 {
-                    ForumName = "Informellt Forum",
+                    ForumName = "Informal Forum",
                     AllowPushNotifications = false
 
                 };
@@ -97,12 +97,12 @@ namespace ScrumProjekt.Migrations
 
 
             }
-            if (!context.Forums.Any(u => u.ForumName == "Forskning"))
+            if (!context.Forums.Any(u => u.ForumName == "Research Forum"))
             {
                 
                 var forum = new Forum
                 {
-                    ForumName = "Forskning",
+                    ForumName = "Research Forum",
                     AllowPushNotifications = true
 
                 };
@@ -111,12 +111,12 @@ namespace ScrumProjekt.Migrations
 
 
             }
-            if (!context.Forums.Any(u => u.ForumName == "Utbildning"))
+            if (!context.Forums.Any(u => u.ForumName == "Education Forum"))
             {
 
                 var forum = new Forum
                 {
-                    ForumName = "Utbildning",
+                    ForumName = "Education Forum",
                     AllowPushNotifications = true
                 };
 
@@ -124,36 +124,36 @@ namespace ScrumProjekt.Migrations
 
 
             }
-            if (!context.Categories.Any(u => u.Name == "Utbildning"))
+            if (!context.Categories.Any(u => u.Name == "Education"))
             {
 
                 var category = new CategoryModels
                 {
-                    Name = "Utbildning"
+                    Name = "Education"
 
                 };
 
                 context.Categories.Add(category);
 
             }
-            if (!context.Categories.Any(u => u.Name == "Forskning"))
+            if (!context.Categories.Any(u => u.Name == "Research"))
             {
 
                 var category = new CategoryModels
                 {
-                    Name = "Forskning"
+                    Name = "Research"
 
                 };
 
                 context.Categories.Add(category);
 
             }
-            if (!context.Categories.Any(u => u.Name == "Allmänt"))
+            if (!context.Categories.Any(u => u.Name == "General"))
             {
 
                 var category = new CategoryModels
                 {
-                    Name = "Allmänt"
+                    Name = "General"
 
                 };
 
@@ -172,12 +172,12 @@ namespace ScrumProjekt.Migrations
                 context.Categories.Add(category);
 
             }
-            if (!context.Categories.Any(u => u.Name == "Möten"))
+            if (!context.Categories.Any(u => u.Name == "Meetings"))
             {
 
                 var category = new CategoryModels
                 {
-                    Name = "Möten"
+                    Name = "Meetings"
 
                 };
 
